@@ -1,0 +1,33 @@
+{
+  "name": "grow-with-neetu",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@next/mdx": "^15.0.0",
+    "@tailwindcss/postcss": "latest",
+    "clsx": "latest",
+    "lucide-react": "latest",
+    "next": "^15.0.0",
+    "next-mdx-remote": "latest",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "tailwind-merge": "latest"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "latest",
+    "@types/node": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "eslint": "latest",
+    "eslint-config-next": "^15.0.0",
+    "tailwindcss": "latest",
+    "typescript": "latest"
+  }
+}
