@@ -10,8 +10,16 @@ import { resources } from "@/lib/content";
 import { siteConfig } from "@/lib/site";
 import { exams, subjects } from "@/lib/taxonomy";
 import { getLatestVideos, youtubeWatchUrl } from "@/lib/youtube";
+import { createMetadata } from "@/lib/seo";
 
 export const dynamic = "force-static";
+
+export const metadata = createMetadata({
+  title: "Grow With Neetu | Free MPSC Preparation, Notes, Current Affairs and Exam Strategy",
+  description: "Free structured YouTube lectures, notes, current affairs, PYQs and exam strategy for MPSC, Rajyaseva, Combined Exams and Maharashtra government exam aspirants.",
+  path: "/",
+  keywords: ["MPSC Preparation", "Rajyaseva", "Combined Exam", "MPSC Notes", "MPSC Current Affairs"]
+});
 
 export default async function HomePage() {
   const videos = await getLatestVideos(5);
