@@ -3,6 +3,8 @@ import { Mail, PlayCircle } from "lucide-react";
 import { createMetadata } from "@/lib/seo";
 import { siteConfig } from "@/lib/site";
 
+export const dynamic = "force-static";
+
 export const metadata = createMetadata({
   title: "Contact Grow With Neetu | MPSC Learning Support",
   description: "Contact Grow With Neetu for collaborations, student queries, notes and educational support.",

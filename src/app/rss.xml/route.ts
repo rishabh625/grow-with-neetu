@@ -2,7 +2,7 @@ import { articleFromVideo } from "@/lib/content";
 import { siteConfig } from "@/lib/site";
 import { getLatestVideos } from "@/lib/youtube";
 
-export const revalidate = 3600;
+export const dynamic = "force-static";
 
 export async function GET() {
   const videos = await getLatestVideos(50);

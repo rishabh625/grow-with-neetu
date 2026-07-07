@@ -6,6 +6,14 @@ import { resources } from "@/lib/content";
 import { createMetadata } from "@/lib/seo";
 import { siteConfig } from "@/lib/site";
 
+export const dynamic = "force-static";
+
+export async function generateStaticParams() {
+  return resources.map((resource) => ({
+    slug: resource.href.split("/").pop()
+  }));
+}
+
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const resource = resources.find((item) => item.href.endsWith(slug));

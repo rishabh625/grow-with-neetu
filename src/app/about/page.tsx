@@ -4,6 +4,8 @@ import { SubscribeCta } from "@/components/cta-card";
 import { createMetadata } from "@/lib/seo";
 import { siteConfig } from "@/lib/site";
 
+export const dynamic = "force-static";
+
 export const metadata = createMetadata({
   title: "About Grow With Neetu | MPSC Educator and Learning Mission",
   description: "Learn about Neetu's teaching philosophy, mission and free YouTube learning platform for MPSC aspirants.",

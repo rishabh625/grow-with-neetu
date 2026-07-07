@@ -7,7 +7,7 @@ import { createMetadata } from "@/lib/seo";
 import { getLatestVideos } from "@/lib/youtube";
 import { formatDate } from "@/lib/utils";
 
-export const revalidate = 3600;
+export const dynamic = "force-static";
 
 export const metadata = createMetadata({
   title: "MPSC Blog | Notes, Video Summaries, Current Affairs and Strategy",

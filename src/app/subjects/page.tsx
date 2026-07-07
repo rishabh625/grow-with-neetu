@@ -4,6 +4,8 @@ import { SubscribeCta } from "@/components/cta-card";
 import { createMetadata } from "@/lib/seo";
 import { subjects } from "@/lib/taxonomy";
 
+export const dynamic = "force-static";
+
 export const metadata = createMetadata({
   title: "MPSC Subjects | Current Affairs, History, Geography, Polity and More",
   description: "Explore subject-wise MPSC preparation hubs with videos, notes, FAQs and internal links.",

@@ -4,7 +4,7 @@ import { VideoCard } from "@/components/video-card";
 import { createMetadata } from "@/lib/seo";
 import { getLatestVideos } from "@/lib/youtube";
 
-export const revalidate = 3600;
+export const dynamic = "force-static";
 
 export const metadata = createMetadata({
   title: "Latest MPSC YouTube Videos | Grow With Neetu",

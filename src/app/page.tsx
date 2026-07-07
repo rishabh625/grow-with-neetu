@@ -11,7 +11,7 @@ import { siteConfig } from "@/lib/site";
 import { exams, subjects } from "@/lib/taxonomy";
 import { getLatestVideos, youtubeWatchUrl } from "@/lib/youtube";
 
-export const revalidate = 3600;
+export const dynamic = "force-static";
 
 export default async function HomePage() {
   const videos = await getLatestVideos(5);

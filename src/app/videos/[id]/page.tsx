@@ -13,7 +13,7 @@ import { siteConfig } from "@/lib/site";
 import { subjects } from "@/lib/taxonomy";
 import { getLatestVideos, getVideoById, youtubeEmbedUrl, youtubeWatchUrl } from "@/lib/youtube";
 
-export const revalidate = 3600;
+export const dynamic = "force-static";
 
 export async function generateStaticParams() {
   const videos = await getLatestVideos(24);

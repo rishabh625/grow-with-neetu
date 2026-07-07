@@ -4,6 +4,8 @@ import { SubscribeCta } from "@/components/cta-card";
 import { resources } from "@/lib/content";
 import { createMetadata } from "@/lib/seo";
 
+export const dynamic = "force-static";
+
 export const metadata = createMetadata({
   title: "Free MPSC Notes and PDFs | Current Affairs, PYQs, Books and Downloads",
   description: "Download and explore free MPSC notes, PDFs, booklists, previous year papers and current affairs resources.",

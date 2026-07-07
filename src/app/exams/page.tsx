@@ -4,6 +4,8 @@ import { SubscribeCta } from "@/components/cta-card";
 import { exams } from "@/lib/taxonomy";
 import { createMetadata } from "@/lib/seo";
 
+export const dynamic = "force-static";
+
 export const metadata = createMetadata({
   title: "Maharashtra Government Exam Preparation | Rajyaseva, PSI, STI, ASO, Talathi",
   description: "Dedicated preparation pages for Rajyaseva, Combined Exam, PSI, STI, ASO, Forest, Talathi, ZP and Police Bharti.",

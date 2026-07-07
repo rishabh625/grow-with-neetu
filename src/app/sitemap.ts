@@ -4,6 +4,8 @@ import { siteConfig } from "@/lib/site";
 import { exams, subjects } from "@/lib/taxonomy";
 import { getLatestVideos } from "@/lib/youtube";
 
+export const dynamic = "force-static";
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const videos = await getLatestVideos(50);
   const now = new Date();

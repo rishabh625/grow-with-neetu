@@ -10,7 +10,7 @@ import { articleSchema, breadcrumbSchema, createMetadata, faqSchema } from "@/li
 import { subjects } from "@/lib/taxonomy";
 import { getLatestVideos, getVideoById } from "@/lib/youtube";
 
-export const revalidate = 3600;
+export const dynamic = "force-static";
 
 export async function generateStaticParams() {
   const videos = await getLatestVideos(24);

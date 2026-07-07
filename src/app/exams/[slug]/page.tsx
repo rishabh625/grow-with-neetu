@@ -10,7 +10,7 @@ import { breadcrumbSchema, createMetadata, faqSchema } from "@/lib/seo";
 import { exams, getExam, subjects } from "@/lib/taxonomy";
 import { getLatestVideos } from "@/lib/youtube";
 
-export const revalidate = 3600;
+export const dynamic = "force-static";
 
 export function generateStaticParams() {
   return exams.map((exam) => ({ slug: exam.slug }));
