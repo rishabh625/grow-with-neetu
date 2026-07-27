@@ -108,6 +108,9 @@ export async function getLatestVideos(maxResults = 12): Promise<Video[]> {
   }
 
   const searchUrl = new URL("https://www.googleapis.com/youtube/v3/search");
+  console.log("YouTube API Search URL (Cloudflare):", searchUrl.toString());
+  console.log("YouTube API Key (Cloudflare):", apiKey ? "Present" : "Missing");
+  console.log("YouTube Channel ID (Cloudflare):", channelId ? "Present" : "Missing");
   searchUrl.searchParams.set("key", apiKey);
   searchUrl.searchParams.set("channelId", channelId);
   searchUrl.searchParams.set("part", "id");
