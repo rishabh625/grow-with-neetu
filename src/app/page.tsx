@@ -177,17 +177,7 @@ export default async function HomePage() {
         <div className="rounded-[2rem] border border-blue-100 bg-white p-8 shadow-sm">
           <div className="flex items-start gap-4">
             <Search aria-hidden="true" className="mt-1 h-6 w-6 text-blue-700" />
-            <div>
-              <h2 className="text-2xl font-black tracking-[-0.04em] text-slate-950">SEO-first content architecture</h2>
-              <p className="mt-3 text-sm leading-7 text-slate-600">
-                The site targets educational search intent such as MPSC Current Affairs, Rajyaseva Preparation,
-                Combined Exam Preparation, MPSC Notes, Talathi Preparation and PSI Preparation while linking
-                users back to {siteConfig.name} videos and YouTube subscribe actions.
-              </p>
-              <Link href={youtubeWatchUrl(featured?.id ?? "")} target="_blank" rel="noreferrer" className="mt-4 inline-flex text-sm font-black text-blue-700">
-                Watch on YouTube
-              </Link>
-            </div>
+
           </div>
         </div>
       </section>
