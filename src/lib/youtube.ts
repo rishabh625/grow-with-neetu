@@ -1,3 +1,4 @@
+import { cache } from "react";
 import { subjects } from "@/lib/taxonomy";
 
 export type Video = {
@@ -12,8 +13,20 @@ export type Video = {
   examSlugs: string[];
 };
 
-type YouTubeSearchItem = {
-  id: { videoId?: string };
+type YouTubePlaylistItem = {
+  snippet?: {
+    publishedAt?: string;
+    title?: string;
+    description?: string;
+    thumbnails?: {
+      maxres?: { url: string };
+      high?: { url: string };
+      medium?: { url: string };
+    };
+    resourceId?: {
+      videoId?: string;
+    };
+  };
 };
 
 type YouTubeVideoItem = {
@@ -99,65 +112,103 @@ const fallbackVideos: Video[] = [
   }
 ];
 
-export async function getLatestVideos(maxResults = 12): Promise<Video[]> {
+let fetchCachePromise: Promise<Video[]> | null = null;
+let lastCacheTime = 0;
+const CACHE_TTL_MS = 60 * 1000;
+
+async function fetchAllLatestVideos(): Promise<Video[]> {
   const apiKey = process.env.YOUTUBE_API_KEY;
   const channelId = process.env.YOUTUBE_CHANNEL_ID;
 
   if (!apiKey || !channelId) {
-    return fallbackVideos.slice(0, maxResults);
+    console.warn("YouTube API Key or Channel ID missing from environment. Using fallback videos.");
+    return fallbackVideos;
   }
 
-  const searchUrl = new URL("https://www.googleapis.com/youtube/v3/search");
-  console.log("YouTube API Search URL in (Cloudflare):", searchUrl.toString());
-  console.log("YouTube API Key (Cloudflare):", apiKey ? "Present" : "Missing");
-  console.log("YouTube Channel ID (Cloudflare):", channelId ? "Present" : "Missing");
-  searchUrl.searchParams.set("key", apiKey);
-  searchUrl.searchParams.set("channelId", channelId);
-  searchUrl.searchParams.set("part", "id");
-  searchUrl.searchParams.set("order", "date");
-  searchUrl.searchParams.set("type", "video");
-  searchUrl.searchParams.set("maxResults", String(maxResults));
+  try {
+    const uploadsPlaylistId = channelId.startsWith("UC")
+      ? "UU" + channelId.slice(2)
+      : channelId;
 
-  const searchResponse = await fetch(searchUrl, { next: { revalidate: 3600 } });
-  if (!searchResponse.ok) {
-    return fallbackVideos.slice(0, maxResults);
+    const playlistUrl = new URL("https://www.googleapis.com/youtube/v3/playlistItems");
+    playlistUrl.searchParams.set("key", apiKey);
+    playlistUrl.searchParams.set("playlistId", uploadsPlaylistId);
+    playlistUrl.searchParams.set("part", "snippet");
+    playlistUrl.searchParams.set("maxResults", "50");
+
+    const playlistResponse = await fetch(playlistUrl.toString(), { next: { revalidate: 3600 } });
+    if (!playlistResponse.ok) {
+      const errText = await playlistResponse.text();
+      console.error(`YouTube Playlist API error (${playlistResponse.status}):`, errText);
+      return fallbackVideos;
+    }
+
+    const playlistData = (await playlistResponse.json()) as { items?: YouTubePlaylistItem[] };
+    const items = playlistData.items ?? [];
+    const videoIds = items
+      .map((item) => item.snippet?.resourceId?.videoId)
+      .filter((id): id is string => Boolean(id))
+      .join(",");
+
+    if (!videoIds) {
+      console.warn("No video IDs found in YouTube playlist response.");
+      return fallbackVideos;
+    }
+
+    const videoUrl = new URL("https://www.googleapis.com/youtube/v3/videos");
+    videoUrl.searchParams.set("key", apiKey);
+    videoUrl.searchParams.set("id", videoIds);
+    videoUrl.searchParams.set("part", "snippet,contentDetails,statistics");
+
+    const videoResponse = await fetch(videoUrl.toString(), { next: { revalidate: 3600 } });
+    if (!videoResponse.ok) {
+      const errText = await videoResponse.text();
+      console.error(`YouTube Videos API error (${videoResponse.status}):`, errText);
+      return fallbackVideos;
+    }
+
+    const videoData = (await videoResponse.json()) as { items?: YouTubeVideoItem[] };
+    const fetchedVideos = videoData.items ?? [];
+
+    if (fetchedVideos.length === 0) {
+      return fallbackVideos;
+    }
+
+    return fetchedVideos.map((item) => ({
+      id: item.id,
+      title: item.snippet.title,
+      description: item.snippet.description,
+      publishedAt: item.snippet.publishedAt,
+      duration: formatDuration(item.contentDetails.duration),
+      views: item.statistics?.viewCount ? Number(item.statistics.viewCount) : undefined,
+      thumbnail:
+        item.snippet.thumbnails.maxres?.url ??
+        item.snippet.thumbnails.high?.url ??
+        item.snippet.thumbnails.medium?.url ??
+        `https://i.ytimg.com/vi/${item.id}/hqdefault.jpg`,
+      subjectSlugs: inferSubjects(item.snippet.title + " " + item.snippet.description),
+      examSlugs: inferExams(item.snippet.title + " " + item.snippet.description)
+    }));
+  } catch (err) {
+    console.error("Failed to fetch YouTube videos dynamically:", err);
+    return fallbackVideos;
   }
-
-  const searchData = (await searchResponse.json()) as { items: YouTubeSearchItem[] };
-  const ids = searchData.items.map((item) => item.id.videoId).filter(Boolean).join(",");
-
-  if (!ids) {
-    return fallbackVideos.slice(0, maxResults);
-  }
-
-  const videoUrl = new URL("https://www.googleapis.com/youtube/v3/videos");
-  videoUrl.searchParams.set("key", apiKey);
-  videoUrl.searchParams.set("id", ids);
-  videoUrl.searchParams.set("part", "snippet,contentDetails,statistics");
-
-  const videoResponse = await fetch(videoUrl, { next: { revalidate: 3600 } });
-  if (!videoResponse.ok) {
-    return fallbackVideos.slice(0, maxResults);
-  }
-
-  const videoData = (await videoResponse.json()) as { items: YouTubeVideoItem[] };
-
-  return videoData.items.map((item) => ({
-    id: item.id,
-    title: item.snippet.title,
-    description: item.snippet.description,
-    publishedAt: item.snippet.publishedAt,
-    duration: formatDuration(item.contentDetails.duration),
-    views: item.statistics?.viewCount ? Number(item.statistics.viewCount) : undefined,
-    thumbnail:
-      item.snippet.thumbnails.maxres?.url ??
-      item.snippet.thumbnails.high?.url ??
-      item.snippet.thumbnails.medium?.url ??
-      `https://i.ytimg.com/vi/${item.id}/hqdefault.jpg`,
-    subjectSlugs: inferSubjects(item.snippet.title + " " + item.snippet.description),
-    examSlugs: inferExams(item.snippet.title + " " + item.snippet.description)
-  }));
 }
+
+export const getLatestVideos = cache(async function getLatestVideos(maxResults = 12): Promise<Video[]> {
+  const now = Date.now();
+  if (!fetchCachePromise || now - lastCacheTime > CACHE_TTL_MS) {
+    lastCacheTime = now;
+    fetchCachePromise = fetchAllLatestVideos().catch((err) => {
+      fetchCachePromise = null;
+      console.error("Error in cached YouTube fetch:", err);
+      return fallbackVideos;
+    });
+  }
+
+  const videos = await fetchCachePromise;
+  return videos.slice(0, maxResults);
+});
 
 export async function getVideoById(id: string) {
   const videos = await getLatestVideos(50);
