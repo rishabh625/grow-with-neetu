@@ -19,7 +19,10 @@ export const metadata: Metadata = {
     description: siteConfig.description,
     path: "/"
   }),
-  metadataBase: new URL(siteConfig.url)
+  metadataBase: new URL(siteConfig.url),
+  icons: {
+    icon: "/images/neetu-tiwari.png"
+  }
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
