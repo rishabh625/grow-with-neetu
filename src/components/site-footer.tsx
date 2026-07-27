@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { PlayCircle } from "lucide-react";
+import { PlayCircle, Share2 } from "lucide-react";
 import { navItems, siteConfig } from "@/lib/site";
 import { exams, subjects } from "@/lib/taxonomy";
 
@@ -17,10 +17,19 @@ export function SiteFooter() {
             href={siteConfig.youtubeChannelUrl}
             target="_blank"
             rel="noreferrer"
-            className="mt-6 inline-flex rounded-full bg-white px-5 py-3 text-sm font-black text-slate-950 transition hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-slate-950"
+            className="mt-6 inline-flex rounded-full bg-red px-5 py-3 text-sm font-black text-slate-950 transition hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-slate-950"
           >
             <PlayCircle aria-hidden="true" className="mr-2 h-4 w-4" />
             Watch on YouTube
+          </Link>
+          <Link
+            href={siteConfig.socials.instagram}
+            target="_blank"
+            rel="noreferrer"
+            className="mt-6 ml-4 inline-flex rounded-full bg-red px-5 py-3 text-sm font-black text-slate-950 transition hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-slate-950"
+          >
+            <Share2 aria-hidden="true" className="mr-2 h-4 w-4" />
+            Follow on Instagram
           </Link>
         </div>
         <FooterColumn title="Explore" links={navItems.map((item) => ({ label: item.label, href: item.href }))} />

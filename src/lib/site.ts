@@ -12,7 +12,7 @@ export const siteConfig = {
   email: "hello@growwithneetu.com",
   socials: {
     youtube: process.env.NEXT_PUBLIC_YOUTUBE_CHANNEL_URL ?? "https://www.youtube.com/channel/UC5VgjG5dv42qYKxIYUXoqUw",
-    instagram: "https://www.instagram.com/",
+    instagram: "https://www.instagram.com/growwithneetu_?",
     telegram: "https://t.me/"
   }
 };
