@@ -15,10 +15,19 @@ import { createMetadata } from "@/lib/seo";
 export const dynamic = "force-static";
 
 export const metadata = createMetadata({
-  title: "Grow With Neetu | Free MPSC Preparation, Notes, Current Affairs and Exam Strategy",
-  description: "Free structured YouTube lectures, notes, current affairs, PYQs and exam strategy for MPSC, Rajyaseva, Combined Exams and Maharashtra government exam aspirants.",
+  title: "MPSC Exam Preparation, Notes & Strategy | Grow With Neetu",
+  description:
+    "Comprehensive MPSC exam preparation platform by Neetu Tiwari. Free structured syllabus guides, subject notes, Maharashtra current affairs, PYQs, and strategy for MPSC Rajyaseva & Combined Exams (Group B & C).",
   path: "/",
-  keywords: ["MPSC Preparation", "Rajyaseva", "Combined Exam", "MPSC Notes", "MPSC Current Affairs"]
+  keywords: [
+    "MPSC Preparation",
+    "MPSC Rajyaseva Syllabus",
+    "MPSC Combined Exam",
+    "MPSC Prelims Strategy",
+    "MPSC Notes PDF",
+    "Maharashtra Current Affairs",
+    "MPSC PYQs Previous Year Questions"
+  ]
 });
 
 export default async function HomePage() {
@@ -32,19 +41,19 @@ export default async function HomePage() {
           <div>
             <div className="mb-6 inline-flex items-center rounded-full border border-blue-100 bg-white px-4 py-2 text-sm font-black text-blue-700 shadow-sm">
               <CheckCircle2 aria-hidden="true" className="mr-2 h-4 w-4 text-emerald-600" />
-              Neetu Tiwari&apos;s official learning space
+              Neetu Tiwari&apos;s official MPSC learning platform
             </div>
             <h1 className="text-5xl font-black tracking-[-0.06em] text-slate-950 md:text-6xl lg:text-7xl">
               Grow with Neetu.
-              <span className="block text-blue-700">Prepare with Clarity.</span>
+              <span className="block text-blue-700">MPSC Exam Preparation & Strategy.</span>
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600">
-              Neetu Tiwari guides MPSC and UPSC aspirants with practical exam strategy, PYQ-based
-              analysis, logical elimination methods and calm, focused preparation advice.
+              Structured MPSC Rajyaseva & Combined Exam guidance by Neetu Tiwari. Featuring PYQ-based analysis,
+              Maharashtra history & geography notes, CSAT tricks, and step-by-step Prelims & Mains strategies.
             </p>
             <p className="mt-4 max-w-2xl text-base leading-7 text-slate-600">
-              This website organizes her YouTube lessons into searchable videos, notes, subject hubs
-              and exam pages so aspirants can revise the right content at the right time.
+              Access free video lectures, subject hubs, current affairs updates, and study material organized
+              for Maharashtra government exam aspirants.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Link

@@ -2,35 +2,47 @@ import Link from "next/link";
 import Image from "next/image";
 import { CheckCircle2, PlayCircle, Users, Award, BookOpen, Clock, Target, ArrowRight } from "lucide-react";
 import { SubscribeCta } from "@/components/cta-card";
-import { createMetadata } from "@/lib/seo";
+import { JsonLd } from "@/components/json-ld";
+import { breadcrumbSchema, createMetadata, faqSchema, personSchema } from "@/lib/seo";
 import { siteConfig } from "@/lib/site";
-import { exams, subjects } from "@/lib/taxonomy";
 
 export const dynamic = "force-static";
 
 export const metadata = createMetadata({
-  title: "About Grow With Neetu | Neetu Tiwari - MPSC Educator",
-  description: "Meet Neetu Tiwari, the educator behind Grow With Neetu. Learn about her teaching philosophy, mission, and free MPSC preparation resources for Maharashtra government exams.",
+  title: "About Neetu Tiwari | MPSC Educator & Civil Services Mentor | Grow With Neetu",
+  description:
+    "Meet Neetu Tiwari, the MPSC educator and mentor behind Grow With Neetu. Learn about her teaching philosophy, structured lectures, and free MPSC Rajyaseva & Combined Exam strategy resources.",
   path: "/about",
-  keywords: ["Neetu Tiwari", "MPSC educator", "Grow With Neetu", "MPSC YouTube channel", "Rajyaseva preparation"]
+  keywords: [
+    "Neetu Tiwari",
+    "Neetu Tiwari MPSC strategy",
+    "Grow With Neetu Educator",
+    "MPSC mentor Maharashtra",
+    "Rajyaseva preparation guide",
+    "Grow With Neetu YouTube channel"
+  ]
 });
 
 const faqs = [
   {
     question: "Who is Neetu Tiwari?",
-    answer: "Neetu Tiwari is an educator specializing in Maharashtra Public Service Commission (MPSC) exam preparation. She has helped thousands of aspirants through her free YouTube channel, Grow With Neetu, which provides structured lectures, notes, and exam strategy."
+    answer:
+      "Neetu Tiwari is an educator and mentor specializing in Maharashtra Public Service Commission (MPSC) civil services exam preparation. Through her channel Grow With Neetu, she provides structured lectures, notes, PYQ analysis, and exam strategy for thousands of aspirants."
   },
   {
     question: "What exams does Grow With Neetu cover?",
-    answer: "Grow With Neetu covers major Maharashtra government exams including MPSC Rajyaseva, Combined Exam, PSI, STI, Talathi, and other competitive exams. The content focuses on syllabus-aligned preparation, current affairs, and PYQ analysis."
+    answer:
+      "Grow With Neetu covers major Maharashtra government exams including MPSC Rajyaseva (State Services), Combined Exam (Group B & Group C), PSI, STI, ASO, Talathi, and other competitive civil service exams."
   },
   {
-    question: "Is the content free?",
-    answer: "Yes! All video lectures on the Grow With Neetu YouTube channel are completely free. This website organizes those videos into searchable subjects and exam pages to help aspirants find relevant content quickly."
+    question: "Are the learning resources and YouTube lectures free?",
+    answer:
+      "Yes! All video lectures on the Grow With Neetu YouTube channel are completely free. This portal organizes those videos into searchable subject hubs, notes, and exam guides to help aspirants revise efficiently."
   },
   {
     question: "How can I start preparing with Grow With Neetu?",
-    answer: "Begin by exploring the Subjects page to find topics you need to study, or check the Exams page for exam-specific guidance. You can also watch the latest videos on the Latest Videos page and subscribe to the YouTube channel for regular updates."
+    answer:
+      "Begin by exploring the Subjects page for topic-wise lectures, or check the Exams page for exam-specific preparation strategy. Subscribe to the official YouTube channel for daily updates."
   }
 ];
 
@@ -78,6 +90,16 @@ export default function AboutPage() {
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
+      <JsonLd
+        data={[
+          personSchema(),
+          faqSchema(faqs),
+          breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "About", path: "/about" }
+          ])
+        ]}
+      />
       <p className="text-sm font-black uppercase tracking-[0.2em] text-emerald-600">About</p>
       <h1 className="mt-3 text-4xl font-black tracking-[-0.05em] text-slate-950 md:text-6xl">Meet Neetu Tiwari</h1>
       <p className="mt-6 text-lg leading-8 text-slate-600">

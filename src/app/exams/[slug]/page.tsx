@@ -6,7 +6,7 @@ import { SectionHeading } from "@/components/section-heading";
 import { SubscribeCta } from "@/components/cta-card";
 import { VideoCard } from "@/components/video-card";
 import { resources } from "@/lib/content";
-import { breadcrumbSchema, createMetadata, faqSchema } from "@/lib/seo";
+import { breadcrumbSchema, createMetadata, educationalCourseSchema, faqSchema } from "@/lib/seo";
 import { exams, getExam, subjects } from "@/lib/taxonomy";
 import { getLatestVideos } from "@/lib/youtube";
 
@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!exam) return {};
 
   return createMetadata({
-    title: `${exam.name} Preparation | Videos, Notes, Strategy and PYQs`,
+    title: `${exam.name} Exam Preparation & Syllabus Guide | Grow With Neetu`,
     description: exam.description,
     path: `/exams/${exam.slug}`,
     keywords: exam.keywords
@@ -44,6 +44,11 @@ export default async function ExamPage({ params }: { params: Promise<{ slug: str
     <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
       <JsonLd
         data={[
+          educationalCourseSchema({
+            title: `${exam.name} Exam Preparation Guide`,
+            description: exam.description,
+            path: `/exams/${exam.slug}`
+          }),
           breadcrumbSchema([
             { name: "Home", path: "/" },
             { name: "Exams", path: "/exams" },

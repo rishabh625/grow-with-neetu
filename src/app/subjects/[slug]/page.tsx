@@ -6,7 +6,7 @@ import { SectionHeading } from "@/components/section-heading";
 import { SubscribeCta } from "@/components/cta-card";
 import { VideoCard } from "@/components/video-card";
 import { resources } from "@/lib/content";
-import { breadcrumbSchema, createMetadata, faqSchema } from "@/lib/seo";
+import { breadcrumbSchema, createMetadata, educationalCourseSchema, faqSchema } from "@/lib/seo";
 import { exams, getSubject, subjects } from "@/lib/taxonomy";
 import { getLatestVideos } from "@/lib/youtube";
 
@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!subject) return {};
 
   return createMetadata({
-    title: `${subject.name} for MPSC | Videos, Notes, FAQs and PYQs`,
+    title: `${subject.name} for MPSC Exam | Notes, Strategy & PYQs | Grow With Neetu`,
     description: subject.description,
     path: `/subjects/${subject.slug}`,
     keywords: subject.keywords
@@ -41,6 +41,11 @@ export default async function SubjectPage({ params }: { params: Promise<{ slug: 
     <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
       <JsonLd
         data={[
+          educationalCourseSchema({
+            title: `${subject.name} for MPSC Exam Preparation`,
+            description: subject.description,
+            path: `/subjects/${subject.slug}`
+          }),
           breadcrumbSchema([
             { name: "Home", path: "/" },
             { name: "Subjects", path: "/subjects" },

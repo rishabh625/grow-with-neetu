@@ -2,7 +2,7 @@ export const siteConfig = {
   name: "Grow With Neetu",
   title: "Grow With Neetu | Free MPSC Preparation, Notes, Current Affairs and Exam Strategy",
   description:
-    "Free structured YouTube lectures, notes, current affairs, PYQs and exam strategy for MPSC, Rajyaseva, Combined Exams and Maharashtra government exam aspirants.",
+    "Comprehensive MPSC exam preparation platform by Neetu Tiwari. Free structured syllabus guides, subject notes, Maharashtra current affairs, PYQs, and strategy for MPSC Rajyaseva & Combined Exams.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://growwithneetu.com",
   creator: "Neetu Tiwari",
   locale: "en_IN",
@@ -29,19 +29,25 @@ export const navItems = [
 ] as const;
 
 export const seoKeywords = [
+  "MPSC Rajyaseva Syllabus",
+  "MPSC Prelims Strategy",
+  "MPSC Mains Answer Writing",
   "MPSC Current Affairs",
   "MPSC Notes",
-  "MPSC History",
-  "MPSC Geography",
-  "MPSC Polity",
-  "MPSC Economics",
-  "MPSC Science",
-  "MPSC Preparation",
+  "Maharashtra History for MPSC",
+  "Social Reformers of Maharashtra",
+  "Maharashtra Geography Notes",
+  "Maharashtra Polity Panchayat Raj",
+  "Maharashtra Economy & Budget",
+  "MPSC Science Notes",
+  "MPSC Preparation for Beginners",
   "Rajyaseva Preparation",
-  "Combined Exam Preparation",
-  "MPSC PYQs",
-  "MPSC Strategy",
-  "Talathi Preparation",
+  "Combined Exam Group B Group C",
+  "MPSC PYQs Previous Year Papers",
+  "MPSC Strategy Neetu Tiwari",
   "PSI Preparation",
-  "STI Preparation"
+  "STI Preparation",
+  "ASO Exam Strategy",
+  "MPSC CSAT Strategy"
 ];
+

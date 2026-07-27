@@ -52,6 +52,12 @@ export function websiteSchema() {
     "@type": "WebSite",
     name: siteConfig.name,
     url: siteConfig.url,
+    description: siteConfig.description,
+    publisher: {
+      "@type": "Organization",
+      name: siteConfig.name,
+      url: siteConfig.url
+    },
     potentialAction: {
       "@type": "SearchAction",
       target: `${siteConfig.url}/search?q={search_term_string}`,
@@ -63,9 +69,15 @@ export function websiteSchema() {
 export function organizationSchema() {
   return {
     "@context": "https://schema.org",
-    "@type": "Organization",
+    "@type": "EducationalOrganization",
     name: siteConfig.name,
     url: siteConfig.url,
+    logo: absoluteUrl("/images/neetu-tiwari.png"),
+    description: siteConfig.description,
+    founder: {
+      "@type": "Person",
+      name: siteConfig.creator
+    },
     sameAs: [siteConfig.youtubeChannelUrl, siteConfig.socials.instagram, siteConfig.socials.telegram]
   };
 }
@@ -75,11 +87,53 @@ export function personSchema() {
     "@context": "https://schema.org",
     "@type": "Person",
     name: siteConfig.creator,
-    url: siteConfig.url,
-    jobTitle: "Educator",
-    sameAs: [siteConfig.youtubeChannelUrl]
+    url: absoluteUrl("/about"),
+    jobTitle: "MPSC Educator & Civil Services Mentor",
+    worksFor: {
+      "@type": "EducationalOrganization",
+      name: siteConfig.name,
+      url: siteConfig.url
+    },
+    knowsAbout: [
+      "MPSC Rajyaseva",
+      "MPSC Combined Exam",
+      "Maharashtra Civil Services",
+      "MPSC Prelims & Mains Strategy",
+      "Social Reformers of Maharashtra",
+      "Maharashtra Geography & Polity"
+    ],
+    sameAs: [siteConfig.youtubeChannelUrl, siteConfig.socials.instagram, siteConfig.socials.telegram]
   };
 }
+
+export function educationalCourseSchema({
+  title,
+  description,
+  path
+}: {
+  title: string;
+  description: string;
+  path: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    name: title,
+    description,
+    provider: {
+      "@type": "EducationalOrganization",
+      name: siteConfig.name,
+      sameAs: siteConfig.url
+    },
+    hasCourseInstance: {
+      "@type": "CourseInstance",
+      courseMode: "online",
+      courseWorkload: "PT50H",
+      url: absoluteUrl(path)
+    }
+  };
+}
+
 
 export function breadcrumbSchema(items: { name: string; path: string }[]) {
   return {
