@@ -23,7 +23,7 @@ export const metadata = createMetadata({
 
 export default async function HomePage() {
   const videos = await getLatestVideos(5);
-  const featured = videos[0];
+  const featured = videos.length > 0 ? videos[0] : undefined;
 
   return (
     <>
