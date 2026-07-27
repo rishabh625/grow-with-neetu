@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { CheckCircle2, PlayCircle, Users, Award, BookOpen, Clock, Target, ArrowRight } from "lucide-react";
+import { PlayCircle, Users, Award, BookOpen, Clock, Target, ArrowRight } from "lucide-react";
 import { SubscribeCta } from "@/components/cta-card";
 import { JsonLd } from "@/components/json-ld";
 import { breadcrumbSchema, createMetadata, faqSchema, personSchema } from "@/lib/seo";
