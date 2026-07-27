@@ -13,22 +13,24 @@ export function SiteFooter() {
             Free structured YouTube lectures, notes, current affairs and exam strategy for MPSC,
             Rajyaseva, Combined Exams and Maharashtra government exam aspirants.
           </p>
-          <div className="mt-6 flex space-x-4">
+          <div className="mt-6 flex flex-col space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0">
             <Link
               href={siteConfig.youtubeChannelUrl}
               target="_blank"
               rel="noreferrer"
-              className="rounded-full bg-red p-3 transition hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-slate-950"
+              className="inline-flex items-center rounded-full bg-red px-5 py-3 text-sm font-black text-slate-950 transition hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-slate-950"
             >
-              <img src="/icons/youtube.svg" alt="YouTube" className="h-6 w-6" />
+              <img src="/icons/youtube.svg" alt="YouTube" className="mr-2 h-4 w-4" />
+              Watch/Subscribe on Youtube
             </Link>
             <Link
               href={siteConfig.socials.instagram}
               target="_blank"
               rel="noreferrer"
-              className="rounded-full bg-red p-3 transition hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-slate-950"
+              className="inline-flex items-center rounded-full bg-red px-5 py-3 text-sm font-black text-slate-950 transition hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-slate-950"
             >
-              <img src="/icons/instagram.svg" alt="Instagram" className="h-6 w-6" />
+              <img src="/icons/instagram.svg" alt="Instagram" className="mr-2 h-4 w-4" />
+              Follow on Instagram
             </Link>
           </div>
         </div>
