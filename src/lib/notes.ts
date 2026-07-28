@@ -25,15 +25,15 @@ export const notePdfs: NotePdf[] = [
   },
   {
     slug: "mediaeval-india",
-    title: "Mediaeval India Notes",
+    title: "Medieval India Notes",
     description:
-      "Mediaeval Indian history notes with sultanate, Mughal and regional developments mapped for Maharashtra competitive exams.",
+      "Medieval Indian history notes with sultanate, Mughal and regional developments mapped for Maharashtra competitive exams.",
     subject: "History",
     subjectSlug: "history",
     fileName: "mediaeval-india.pdf",
     fileSize: "14.5 MB",
     updatedAt: "2025-04-21",
-    keywords: ["Mediaeval India Notes", "Medieval History MPSC", "MPSC History PDF"]
+    keywords: ["Medieval India Notes", "Medieval History MPSC", "MPSC History PDF"]
   },
   {
     slug: "buddhism-and-jainism",
