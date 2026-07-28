@@ -132,7 +132,7 @@ export default async function VideoPage({ params }: { params: Promise<{ id: stri
             <div className="mt-5 space-y-3">
               <ActionLink href={youtubeWatchUrl(video.id)} label="Watch on YouTube" icon={<PlayCircle className="h-4 w-4" />} external />
               <ActionLink href={siteConfig.youtubeChannelUrl} label="Subscribe" icon={<PlayCircle className="h-4 w-4" />} external />
-              <ActionLink href={`/notes/${video.id}`} label="Download Notes" icon={<Download className="h-4 w-4" />} />
+              <ActionLink href="/notes" label="Browse Notes" icon={<Download className="h-4 w-4" />} />
               <ActionLink href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(absoluteUrl(pagePath))}&text=${encodeURIComponent(video.title)}`} label="Share Video" icon={<Share2 className="h-4 w-4" />} external />
             </div>
           </div>

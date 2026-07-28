@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { resources } from "@/lib/content";
+import { notePdfs } from "@/lib/notes";
 import { siteConfig } from "@/lib/site";
 import { exams, subjects } from "@/lib/taxonomy";
 import { getLatestVideos } from "@/lib/youtube";
@@ -46,11 +46,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }
   ]);
 
-  const noteRoutes = resources.map((resource) => ({
-    url: `${siteConfig.url}${resource.href}`,
-    lastModified: now,
+  const noteRoutes = notePdfs.map((note) => ({
+    url: `${siteConfig.url}/notes/${note.slug}`,
+    lastModified: new Date(note.updatedAt),
     changeFrequency: "monthly" as const,
-    priority: 0.7
+    priority: 0.75
   }));
 
   return [...staticRoutes, ...subjectRoutes, ...examRoutes, ...videoRoutes, ...noteRoutes];

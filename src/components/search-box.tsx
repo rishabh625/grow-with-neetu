@@ -18,7 +18,7 @@ export function SearchBox({ defaultValue = "" }: { defaultValue?: string }) {
       }}
     >
       <label htmlFor="site-search" className="sr-only">
-        Search videos, blogs, subjects and exams
+        Search notes, videos, blogs, subjects and exams
       </label>
       <Search aria-hidden="true" className="absolute left-5 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400" />
       <input

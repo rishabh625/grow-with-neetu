@@ -31,7 +31,7 @@ export const metadata = createMetadata({
 });
 
 export default async function HomePage() {
-  const videos = await getLatestVideos(5);
+  const videos = await getLatestVideos(6);
   const featured = videos.length > 0 ? videos[0] : undefined;
 
   return (
@@ -156,16 +156,22 @@ export default async function HomePage() {
         </div>
         <aside className="rounded-[2rem] border border-emerald-100 bg-emerald-50 p-8">
           <p className="text-sm font-black uppercase tracking-[0.18em] text-emerald-700">Free Resources</p>
-          <h2 className="mt-3 text-3xl font-black tracking-[-0.04em] text-slate-950">Notes, PDFs, books and PYQs in one place.</h2>
+          <h2 className="mt-3 text-3xl font-black tracking-[-0.04em] text-slate-950">Notes and PDFs ready to download.</h2>
           <div className="mt-6 space-y-4">
-            {resources.map((resource) => (
-              <Link key={resource.href} href={resource.href} className="block rounded-2xl bg-white p-4 shadow-sm transition hover:shadow-md">
+            {resources.slice(0, 4).map((resource) => (
+              <Link key={resource.href} href={resource.href} className="block rounded-2xl bg-white p-4 shadow-sm transition hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500">
                 <span className="text-xs font-black uppercase tracking-[0.16em] text-blue-700">{resource.category}</span>
                 <span className="mt-1 block font-black text-slate-950">{resource.title}</span>
                 <span className="mt-1 block text-sm leading-6 text-slate-600">{resource.description}</span>
               </Link>
             ))}
           </div>
+          <Link
+            href="/notes"
+            className="mt-6 inline-flex text-sm font-black text-emerald-800 transition hover:text-emerald-950 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
+          >
+            Browse all notes
+          </Link>
         </aside>
       </section>
 

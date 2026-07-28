@@ -4,9 +4,18 @@ import Link from "next/link";
 import { SearchBox } from "@/components/search-box";
 import { exams, subjects } from "@/lib/taxonomy";
 import { articleFromVideo } from "@/lib/content";
+import { notePdfs } from "@/lib/notes";
 import { getLatestVideos } from "@/lib/youtube";
 import { useEffect, useState } from "react";
 import type { Video } from "@/lib/youtube";
+
+type SearchResult = {
+  type: string;
+  title: string;
+  description: string;
+  href: string;
+  keywords?: string;
+};
 
 export default function SearchClient() {
   const [videos, setVideos] = useState<Video[]>([]);
@@ -25,14 +34,53 @@ export default function SearchClient() {
 
   const articles = videos.map(articleFromVideo);
 
-  const results = [
-    ...videos.map((video) => ({ type: "Video", title: video.title, description: video.description, href: `/videos/${video.id}` })),
-    ...articles.map((article) => ({ type: "Blog", title: article.title, description: article.description, href: `/blog/${article.slug}` })),
-    ...subjects.map((subject) => ({ type: "Subject", title: subject.name, description: subject.description, href: `/subjects/${subject.slug}` })),
-    ...exams.map((exam) => ({ type: "Exam", title: exam.name, description: exam.description, href: `/exams/${exam.slug}` }))
+  const results: SearchResult[] = [
+    {
+      type: "Notes",
+      title: "Free MPSC Notes and PDFs",
+      description: "Browse all downloadable History, Ethics and General Studies notes from Grow With Neetu.",
+      href: "/notes",
+      keywords: "notes PDF downloads study material free"
+    },
+    ...notePdfs.map((note) => ({
+      type: "Notes",
+      title: note.title,
+      description: note.description,
+      href: `/notes/${note.slug}`,
+      keywords: `${note.subject} ${note.keywords.join(" ")} PDF download`
+    })),
+    ...videos.map((video) => ({
+      type: "Video",
+      title: video.title,
+      description: video.description,
+      href: `/videos/${video.id}`,
+      keywords: ""
+    })),
+    ...articles.map((article) => ({
+      type: "Blog",
+      title: article.title,
+      description: article.description,
+      href: `/blog/${article.slug}`,
+      keywords: ""
+    })),
+    ...subjects.map((subject) => ({
+      type: "Subject",
+      title: subject.name,
+      description: subject.description,
+      href: `/subjects/${subject.slug}`,
+      keywords: subject.keywords.join(" ")
+    })),
+    ...exams.map((exam) => ({
+      type: "Exam",
+      title: exam.name,
+      description: exam.description,
+      href: `/exams/${exam.slug}`,
+      keywords: exam.keywords.join(" ")
+    }))
   ].filter((item) => {
     if (!query) return true;
-    return `${item.type} ${item.title} ${item.description}`.toLowerCase().includes(query.toLowerCase());
+    const haystack = `${item.type} ${item.title} ${item.description} ${item.keywords}`.toLowerCase();
+    return haystack.includes(query.toLowerCase());
   });
 
   return (
@@ -44,12 +92,16 @@ export default function SearchClient() {
       </div>
 
       <p className="mt-8 text-sm font-bold text-slate-600">
-        {query ? `${results.length} results for "${query}"` : `${results.length} searchable pages and videos`}
+        {query ? `${results.length} results for "${query}"` : `${results.length} searchable notes, pages and videos`}
       </p>
 
       <div className="mt-6 space-y-4">
         {results.map((result) => (
-          <Link key={`${result.type}-${result.href}`} href={result.href} className="block rounded-[1.25rem] border border-blue-100 bg-white p-5 shadow-sm transition hover:shadow-md">
+          <Link
+            key={`${result.type}-${result.href}`}
+            href={result.href}
+            className="block rounded-[1.25rem] border border-blue-100 bg-white p-5 shadow-sm transition hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+          >
             <span className="text-xs font-black uppercase tracking-[0.16em] text-blue-700">{result.type}</span>
             <h2 className="mt-2 text-xl font-black tracking-[-0.03em] text-slate-950">{result.title}</h2>
             <p className="mt-2 text-sm leading-6 text-slate-600">{result.description}</p>

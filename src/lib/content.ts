@@ -1,38 +1,19 @@
+import { notePdfs } from "@/lib/notes";
 import type { Video } from "@/lib/youtube";
 
 export type Resource = {
   title: string;
   description: string;
   href: string;
-  category: "Notes" | "PDF" | "Books" | "PYQ" | "Current Affairs";
+  category: "Notes" | "PDF" | "Books" | "PYQ" | "Current Affairs" | "History" | "Ethics" | "General Studies";
 };
 
-export const resources: Resource[] = [
-  {
-    title: "MPSC Current Affairs Monthly PDF",
-    description: "Monthly revision PDFs for Maharashtra, India and international current affairs.",
-    href: "/notes/current-affairs-monthly-pdf",
-    category: "Current Affairs"
-  },
-  {
-    title: "Rajyaseva Booklist",
-    description: "Subject-wise important books for prelims, mains and interview preparation.",
-    href: "/notes/rajyaseva-booklist",
-    category: "Books"
-  },
-  {
-    title: "MPSC PYQ Tracker",
-    description: "Previous year question checklist for identifying recurring concepts.",
-    href: "/notes/mpsc-pyq-tracker",
-    category: "PYQ"
-  },
-  {
-    title: "Combined Exam Formula Notes",
-    description: "Quick maths, reasoning and grammar notes for last-mile revision.",
-    href: "/notes/combined-formula-notes",
-    category: "Notes"
-  }
-];
+export const resources: Resource[] = notePdfs.map((note) => ({
+  title: note.title,
+  description: note.description,
+  href: `/notes/${note.slug}`,
+  category: note.subject as Resource["category"]
+}));
 
 export type Article = {
   slug: string;

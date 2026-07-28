@@ -5,7 +5,7 @@ export const dynamic = "force-static";
 
 export const metadata = createMetadata({
   title: "Search MPSC Videos, Notes, Subjects and Exams | Grow With Neetu",
-  description: "Search across Grow With Neetu videos, blog articles, subjects and exam preparation pages.",
+  description: "Search across Grow With Neetu notes, PDFs, videos, blog articles, subjects and exam preparation pages.",
   path: "/search"
 });
 

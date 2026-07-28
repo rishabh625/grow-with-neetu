@@ -24,7 +24,7 @@ export function SubscribeCta({ compact = false }: { compact?: boolean }) {
             rel="noreferrer"
             className="inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-black text-blue-700 transition hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-700"
           >
-            <PlayCircle aria-hidden="true" className="mr-2 h-4 w-4" />
+            <PlayCircle aria-hidden="true" className="mr-2 h-4 w-4 shrink-0" />
             Subscribe
           </Link>
           <Link
