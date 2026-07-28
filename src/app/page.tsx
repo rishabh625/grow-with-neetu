@@ -48,9 +48,9 @@ export default async function HomePage() {
             </div>
             <h1 className="text-5xl font-black tracking-[-0.06em] text-slate-950 md:text-6xl lg:text-7xl">
               Grow with Neetu.
-              <span className="block text-4xl text-blue-700 md:text-5xl lg:text-6xl">
-    Civil Services Exam Preparation & Strategy (MPSC-focused).
-  </span>            </h1>
+              <span className="mt-2 block text-3xl font-semibold text-blue-700 md:text-4xl lg:text-5xl">
+  Civil Services Exam Preparation & Strategy (MPSC-focused).
+</span>           </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600">
               Structured civil services guidance with MPSC Rajyaseva & Combined Exams as the main focus. Featuring PYQ-based
               analysis, high-yield notes, CSAT tricks, and step-by-step Prelims & Mains strategies.
