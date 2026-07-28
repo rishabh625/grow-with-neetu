@@ -25,7 +25,7 @@ export function SearchBox({ defaultValue = "" }: { defaultValue?: string }) {
         id="site-search"
         name="q"
         defaultValue={defaultValue}
-        placeholder="Search MPSC videos, notes, subjects..."
+        placeholder="Search civil services videos, notes, subjects..."
         className="h-14 w-full rounded-full border border-blue-100 bg-white pl-13 pr-32 text-base font-semibold text-slate-900 shadow-sm outline-none transition placeholder:text-slate-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
       />
       <button

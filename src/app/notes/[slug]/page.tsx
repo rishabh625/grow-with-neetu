@@ -19,10 +19,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const note = getNoteBySlug(slug);
 
   return createMetadata({
-    title: note ? `${note.title} PDF | Grow With Neetu` : "MPSC Notes Download | Grow With Neetu",
-    description: note?.description ?? "Download MPSC notes and related study resources.",
+    title: note ? `${note.title} PDF | Grow With Neetu` : "Civil Services Notes Download | Grow With Neetu",
+    description: note?.description ?? "Download MPSC-focused civil services notes and related study resources.",
     path: `/notes/${slug}`,
-    keywords: note?.keywords ?? ["MPSC Notes", "MPSC PDF Downloads"]
+    keywords: note?.keywords ?? ["Civil Services Notes", "MPSC-focused PDF Downloads"]
   });
 }
 

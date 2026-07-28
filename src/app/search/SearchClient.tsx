@@ -37,7 +37,7 @@ export default function SearchClient() {
   const results: SearchResult[] = [
     {
       type: "Notes",
-      title: "Free MPSC Notes and PDFs",
+      title: "Free MPSC-focused Notes and PDFs",
       description: "Browse all downloadable History, Ethics and General Studies notes from Grow With Neetu.",
       href: "/notes",
       keywords: "notes PDF downloads study material free"
@@ -86,7 +86,9 @@ export default function SearchClient() {
   return (
     <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
       <p className="text-sm font-black uppercase tracking-[0.2em] text-emerald-600">Search</p>
-      <h1 className="mt-3 text-4xl font-black tracking-[-0.05em] text-slate-950 md:text-5xl">Find MPSC learning content faster.</h1>
+      <h1 className="mt-3 text-4xl font-black tracking-[-0.05em] text-slate-950 md:text-5xl">
+        Find civil services learning content faster (MPSC-focused).
+      </h1>
       <div className="mt-8">
         <SearchBox defaultValue={query} />
       </div>

@@ -1,8 +1,8 @@
 export const siteConfig = {
   name: "Grow With Neetu",
-  title: "Grow With Neetu | Free MPSC Preparation, Notes, Current Affairs and Exam Strategy",
+  title: "Grow With Neetu | MPSC-Focused Civil Services Prep (UPSC/UPPSC/BPSC)",
   description:
-    "Comprehensive MPSC exam preparation platform by Neetu Tiwari. Free structured syllabus guides, subject notes, Maharashtra current affairs, PYQs, and strategy for MPSC Rajyaseva & Combined Exams.",
+    "MPSC-focused exam preparation platform by Neetu Tiwari. Free structured syllabus guides, subject notes, current affairs, PYQ-based strategy and revision systems for MPSC Rajyaseva & Combined Exams—also helpful for UPSC, UPPSC, BPSC and other civil services.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://growwithneetu.com",
   creator: "Neetu Tiwari",
   locale: "en_IN",
@@ -34,6 +34,11 @@ export const seoKeywords = [
   "MPSC Mains Answer Writing",
   "MPSC Current Affairs",
   "MPSC Notes",
+  "UPSC Preparation",
+  "UPPSC Preparation",
+  "BPSC Preparation",
+  "State PCS Preparation",
+  "Civil Services Preparation",
   "Maharashtra History for MPSC",
   "Social Reformers of Maharashtra",
   "Maharashtra Geography Notes",

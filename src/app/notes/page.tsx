@@ -7,13 +7,15 @@ import { createMetadata } from "@/lib/seo";
 export const dynamic = "force-static";
 
 export const metadata = createMetadata({
-  title: "Free MPSC Notes and PDFs | History, Ethics and Study Downloads",
+  title: "Free MPSC-focused Notes and PDFs | History, Ethics and Civil Services Downloads",
   description:
-    "Download free MPSC notes and PDFs — Ancient India, Mediaeval India, Buddhism & Jainism, Ethics practice and more from Grow With Neetu.",
+    "Download free MPSC-focused notes and PDFs — Ancient India, Mediaeval India, Buddhism & Jainism, Ethics practice and more from Grow With Neetu. These notes also support UPSC/UPPSC/BPSC revision.",
   path: "/notes",
   keywords: [
     "MPSC Notes",
-    "MPSC PDF Downloads",
+    "Civil Services Notes",
+    "UPSC Preparation",
+    "UPPSC Preparation",
     "Ancient India Notes",
     "Ethics Notes MPSC",
     "Free MPSC Study Material"
@@ -34,7 +36,7 @@ export default function NotesPage() {
         <section className="max-w-3xl">
           <p className="text-sm font-bold uppercase tracking-[0.2em] text-emerald-600">Free Notes</p>
           <h1 className="mt-3 text-4xl font-black tracking-[-0.05em] text-slate-950 md:text-5xl">
-            Download MPSC notes and PDFs
+            Download MPSC-focused notes and PDFs
           </h1>
           <p className="mt-4 text-lg leading-8 text-slate-600">
             Subject-wise handwritten-style notes for History, Ethics and General Studies — free to download and revise

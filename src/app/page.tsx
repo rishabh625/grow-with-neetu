@@ -15,12 +15,15 @@ import { createMetadata } from "@/lib/seo";
 export const dynamic = "force-static";
 
 export const metadata = createMetadata({
-  title: "MPSC Exam Preparation, Notes & Strategy | Grow With Neetu",
+  title: "Civil Services Exam Preparation, Notes & Strategy | Grow With Neetu (MPSC-focused)",
   description:
-    "Comprehensive MPSC exam preparation platform by Neetu Tiwari. Free structured syllabus guides, subject notes, Maharashtra current affairs, PYQs, and strategy for MPSC Rajyaseva & Combined Exams (Group B & C).",
+    "MPSC-focused civil services exam preparation by Neetu Tiwari. Free structured syllabus guides, subject notes, current affairs, PYQs, and strategy for MPSC Rajyaseva & Combined Exams—also useful for UPSC, UPPSC, BPSC and other civil services.",
   path: "/",
   keywords: [
     "MPSC Preparation",
+    "UPSC Preparation",
+    "UPPSC Preparation",
+    "BPSC Preparation",
     "MPSC Rajyaseva Syllabus",
     "MPSC Combined Exam",
     "MPSC Prelims Strategy",
@@ -41,19 +44,20 @@ export default async function HomePage() {
           <div>
             <div className="mb-6 inline-flex items-center rounded-full border border-blue-100 bg-white px-4 py-2 text-sm font-black text-blue-700 shadow-sm">
               <CheckCircle2 aria-hidden="true" className="mr-2 h-4 w-4 text-emerald-600" />
-              Neetu Tiwari&apos;s official MPSC learning platform
+              Neetu Tiwari&apos;s civil services learning portal (MPSC-focused)
             </div>
             <h1 className="text-5xl font-black tracking-[-0.06em] text-slate-950 md:text-6xl lg:text-7xl">
               Grow with Neetu.
-              <span className="block text-blue-700">MPSC Exam Preparation & Strategy.</span>
-            </h1>
+              <span className="block text-4xl text-blue-700 md:text-5xl lg:text-6xl">
+    Civil Services Exam Preparation & Strategy (MPSC-focused).
+  </span>            </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600">
-              Structured MPSC Rajyaseva & Combined Exam guidance by Neetu Tiwari. Featuring PYQ-based analysis,
-              Maharashtra history & geography notes, CSAT tricks, and step-by-step Prelims & Mains strategies.
+              Structured civil services guidance with MPSC Rajyaseva & Combined Exams as the main focus. Featuring PYQ-based
+              analysis, high-yield notes, CSAT tricks, and step-by-step Prelims & Mains strategies.
             </p>
             <p className="mt-4 max-w-2xl text-base leading-7 text-slate-600">
               Access free video lectures, subject hubs, current affairs updates, and study material organized
-              for Maharashtra government exam aspirants.
+              for aspirants of MPSC, UPSC, UPPSC, BPSC and other state/union civil services.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Link
@@ -145,8 +149,8 @@ export default async function HomePage() {
         <div>
           <SectionHeading
             eyebrow="Exam Preparation"
-            title="Dedicated exam pages for Maharashtra government exams"
-            description="Target exam-specific intent with syllabus-aligned videos, notes, PYQs and strategy."
+            title="Dedicated exam pages for MPSC & other civil services"
+            description="Target exam-specific intent for MPSC and other state/union civil services, with syllabus-aligned videos, notes, PYQs and strategy."
           />
           <div className="grid gap-5 sm:grid-cols-2">
             {exams.slice(0, 6).map((exam) => (
@@ -177,15 +181,6 @@ export default async function HomePage() {
 
       <section className="mx-auto max-w-7xl px-4 pb-16 sm:px-6 lg:px-8">
         <SubscribeCta />
-      </section>
-
-      <section className="mx-auto max-w-7xl px-4 pb-16 sm:px-6 lg:px-8">
-        <div className="rounded-[2rem] border border-blue-100 bg-white p-8 shadow-sm">
-          <div className="flex items-start gap-4">
-            <Search aria-hidden="true" className="mt-1 h-6 w-6 text-blue-700" />
-
-          </div>
-        </div>
       </section>
     </>
   );

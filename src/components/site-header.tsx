@@ -28,7 +28,7 @@ export function SiteHeader() {
           </span>
           <span>
             <span className="block text-base font-black tracking-[-0.03em] text-slate-950">{siteConfig.name}</span>
-            <span className="block text-xs font-semibold text-emerald-700">MPSC Learning Portal</span>
+            <span className="block text-xs font-semibold text-emerald-700">Civil Services & MPSC Learning Portal</span>
           </span>
         </Link>
 

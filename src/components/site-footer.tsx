@@ -10,8 +10,8 @@ export function SiteFooter() {
         <div className="sm:col-span-2 lg:col-span-1">
           <p className="text-2xl font-black tracking-[-0.04em] text-white">{siteConfig.name}</p>
           <p className="mt-4 max-w-md text-sm leading-7 text-slate-300">
-            Free structured YouTube lectures, notes, current affairs and exam strategy for MPSC,
-            Rajyaseva, Combined Exams and Maharashtra government exam aspirants.
+            Free structured YouTube lectures, notes, current affairs and exam strategy for MPSC and
+            other civil services (UPSC, UPPSC, BPSC and state PCS aspirants).
           </p>
           <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <Link

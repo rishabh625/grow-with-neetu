@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!subject) return {};
 
   return createMetadata({
-    title: `${subject.name} for MPSC Exam | Notes, Strategy & PYQs | Grow With Neetu`,
+    title: `${subject.name} for Civil Services (MPSC-focused) | Notes, Strategy & PYQs | Grow With Neetu`,
     description: subject.description,
     path: `/subjects/${subject.slug}`,
     keywords: subject.keywords
@@ -42,7 +42,7 @@ export default async function SubjectPage({ params }: { params: Promise<{ slug: 
       <JsonLd
         data={[
           educationalCourseSchema({
-            title: `${subject.name} for MPSC Exam Preparation`,
+            title: `${subject.name} for Civil Services (MPSC-focused) Exam Preparation`,
             description: subject.description,
             path: `/subjects/${subject.slug}`
           }),
@@ -56,8 +56,8 @@ export default async function SubjectPage({ params }: { params: Promise<{ slug: 
       />
       <SectionHeading
         eyebrow="Subject Hub"
-        title={`${subject.name} for MPSC Preparation`}
-        description={`${subject.description} Find latest videos, study notes, blog summaries, FAQs and exam-specific internal links.`}
+        title={`${subject.name} for Civil Services (MPSC-focused)`}
+        description={`${subject.description} Find latest videos, study notes, blog summaries, FAQs and exam-specific internal links—starting with MPSC patterns and applicable to UPSC/UPPSC/BPSC preparation.`}
       />
 
       <div className="grid gap-8 lg:grid-cols-[1fr_360px]">

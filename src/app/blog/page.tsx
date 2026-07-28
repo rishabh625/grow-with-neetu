@@ -10,10 +10,11 @@ import { formatDate } from "@/lib/utils";
 export const dynamic = "force-static";
 
 export const metadata = createMetadata({
-  title: "MPSC Blog | Notes, Video Summaries, Current Affairs and Strategy",
-  description: "Read SEO-friendly MPSC articles generated from Grow With Neetu videos with summaries, concepts, facts and FAQs.",
+  title: "Civil Services Blog (MPSC-focused) | Notes, Video Summaries, Current Affairs and Strategy",
+  description:
+    "Read study articles generated from Grow With Neetu videos with summaries, concepts, facts and FAQs—MPSC-focused with strategy that also helps for UPSC/UPPSC/BPSC patterns.",
   path: "/blog",
-  keywords: ["MPSC blog", "MPSC article", "MPSC video summary"]
+  keywords: ["Civil Services blog", "MPSC-focused article", "UPSC Preparation", "UPPSC Preparation", "BPSC Preparation"]
 });
 
 export default async function BlogPage() {

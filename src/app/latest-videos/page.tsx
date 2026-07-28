@@ -7,10 +7,10 @@ import { getLatestVideos } from "@/lib/youtube";
 export const dynamic = "force-static";
 
 export const metadata = createMetadata({
-  title: "Latest MPSC YouTube Videos | Grow With Neetu",
-  description: "Watch latest MPSC preparation videos for current affairs, subjects, PYQs and exam strategy.",
+  title: "Latest Civil Services YouTube Videos (MPSC-focused) | Grow With Neetu",
+  description: "Watch latest civil services preparation videos for current affairs, subjects, PYQs and exam strategy—MPSC-focused but applicable to UPSC/UPPSC/BPSC patterns.",
   path: "/latest-videos",
-  keywords: ["Latest MPSC videos", "MPSC YouTube lectures"]
+  keywords: ["Latest MPSC videos", "Civil Services Videos", "UPSC Preparation", "UPPSC Preparation", "BPSC Preparation"]
 });
 
 export default async function LatestVideosPage() {

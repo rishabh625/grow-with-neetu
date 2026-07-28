@@ -9,14 +9,18 @@ import { siteConfig } from "@/lib/site";
 export const dynamic = "force-static";
 
 export const metadata = createMetadata({
-  title: "About Neetu Tiwari | MPSC Educator & Civil Services Mentor | Grow With Neetu",
+  title: "About Neetu Tiwari | Civil Services Educator (MPSC-focused) | Grow With Neetu",
   description:
-    "Meet Neetu Tiwari, the MPSC educator and mentor behind Grow With Neetu. Learn about her teaching philosophy, structured lectures, and free MPSC Rajyaseva & Combined Exam strategy resources.",
+    "Meet Neetu Tiwari, a civil services educator behind Grow With Neetu. MPSC-focused guidance with learning methods that also help for UPSC, UPPSC, BPSC and other civil services.",
   path: "/about",
   keywords: [
     "Neetu Tiwari",
     "Neetu Tiwari MPSC strategy",
     "Grow With Neetu Educator",
+    "Civil Services Preparation",
+    "UPSC Preparation",
+    "UPPSC Preparation",
+    "BPSC Preparation",
     "MPSC mentor Maharashtra",
     "Rajyaseva preparation guide",
     "Grow With Neetu YouTube channel"
@@ -27,12 +31,12 @@ const faqs = [
   {
     question: "Who is Neetu Tiwari?",
     answer:
-      "Neetu Tiwari is an educator and mentor specializing in Maharashtra Public Service Commission (MPSC) civil services exam preparation. Through her channel Grow With Neetu, she provides structured lectures, notes, PYQ analysis, and exam strategy for thousands of aspirants."
+      "Neetu Tiwari is an educator and mentor specializing in civil services preparation with a MPSC-first approach. Through her channel Grow With Neetu, she provides structured lectures, notes, PYQ analysis, and exam strategy that also support UPSC/UPPSC/BPSC aspirants."
   },
   {
     question: "What exams does Grow With Neetu cover?",
     answer:
-      "Grow With Neetu covers major Maharashtra government exams including MPSC Rajyaseva (State Services), Combined Exam (Group B & Group C), PSI, STI, ASO, Talathi, and other competitive civil service exams."
+      "Grow With Neetu covers major MPSC Rajyaseva (State Services) and Combined Exams, along with preparation methods for other competitive civil services. You can use the same syllabus-first, PYQ-based strategy for UPPSC, BPSC, UPSC and similar exams."
   },
   {
     question: "Are the learning resources and YouTube lectures free?",
@@ -74,7 +78,7 @@ export default function AboutPage() {
     {
       icon: <Award aria-hidden="true" className="h-5 w-5 text-blue-600" />,
       title: "Experienced Educator",
-      description: "Years of teaching experience in MPSC and Maharashtra government exam preparation."
+      description: "Years of teaching experience in MPSC and civil services preparation, with methods you can apply to UPSC, UPPSC, BPSC and other state/union exams."
     },
     {
       icon: <BookOpen aria-hidden="true" className="h-5 w-5 text-blue-600" />,
@@ -103,9 +107,7 @@ export default function AboutPage() {
       <p className="text-sm font-black uppercase tracking-[0.2em] text-emerald-600">About</p>
       <h1 className="mt-3 text-4xl font-black tracking-[-0.05em] text-slate-950 md:text-6xl">Meet Neetu Tiwari</h1>
       <p className="mt-6 text-lg leading-8 text-slate-600">
-        {siteConfig.name} is an educational YouTube channel and learning portal for MPSC, Rajyaseva,
-        Combined Exams and Maharashtra government exam preparation. Founded by Neetu Tiwari,
-        the mission is to make structured, reliable and exam-oriented learning accessible to every aspirant - completely free.
+        {siteConfig.name} is an educational YouTube channel and learning portal with a MPSC-first focus. The learning methods, revision systems and PYQ strategy are designed to help aspirants of MPSC, Rajyaseva, Combined Exams and other civil services like UPSC/UPPSC/BPSC—completely free.
       </p>
 
       <section className="mt-12 grid gap-8 md:grid-cols-[1fr_1.2fr] items-start">
@@ -113,14 +115,14 @@ export default function AboutPage() {
           <div className="relative aspect-square bg-blue-50 rounded-[1.5rem] overflow-hidden">
             <Image
               src="/images/neetu-tiwari.png"
-              alt="Neetu Tiwari - MPSC Educator"
+              alt="Neetu Tiwari - Civil Services Educator (MPSC-focused)"
               fill
               className="object-cover"
             />
           </div>
           <div className="mt-6">
             <h2 className="text-2xl font-black tracking-[-0.04em] text-slate-950">Neetu Tiwari</h2>
-            <p className="mt-2 text-sm font-bold text-emerald-600">MPSC Educator & Mentor</p>
+            <p className="mt-2 text-sm font-bold text-emerald-600">Civil Services Educator & Mentor (MPSC-focused)</p>
           </div>
         </div>
 
