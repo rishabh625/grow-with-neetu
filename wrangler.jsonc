@@ -1,7 +1,8 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "main": ".open-next/worker.js",
   "name": "grow-with-neetu",
+  "account_id": "38360fb72e6d14571b89a1efd7ae3f8c",
+  "main": ".open-next/worker.js",
   "compatibility_date": "2026-07-28",
   "compatibility_flags": [
     "nodejs_compat"
