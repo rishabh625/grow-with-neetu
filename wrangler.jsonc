@@ -1,0 +1,31 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "main": ".open-next/worker.js",
+  "name": "grow-with-neetu",
+  "compatibility_date": "2026-07-28",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "services": [
+    {
+      "binding": "WORKER_SELF_REFERENCE",
+      "service": "grow-with-neetu"
+    }
+  ],
+  "images": {
+    "binding": "IMAGES"
+  },
+  "observability": {
+    "enabled": true
+  },
+  "vars": {
+    "YOUTUBE_API_KEY": "AIzaSyBIeVJUa1h0H5tK2wKk7AMNrj5E6BAIOaM",
+    "YOUTUBE_CHANNEL_ID": "UC5VgjG5dv42qYKxIYUXoqUw",
+    "NEXT_PUBLIC_YOUTUBE_CHANNEL_URL": "https://www.youtube.com/channel/UC5VgjG5dv42qYKxIYUXoqUw",
+    "NEXT_PUBLIC_SITE_URL": "https://neetutiwari.com"
+  }
+}

@@ -128,8 +128,8 @@ let lastCacheTime = 0;
 const CACHE_TTL_MS = 60 * 1000;
 
 async function fetchAllLatestVideos(): Promise<Video[]> {
-  const apiKey = process.env.YOUTUBE_API_KEY;
-  const channelId = process.env.YOUTUBE_CHANNEL_ID;
+  const apiKey = process.env.YOUTUBE_API_KEY || "AIzaSyBIeVJUa1h0H5tK2wKk7AMNrj5E6BAIOaM";
+  const channelId = process.env.YOUTUBE_CHANNEL_ID || "UC5VgjG5dv42qYKxIYUXoqUw";
 
   if (!apiKey || !channelId) {
     console.warn("YouTube API Key or Channel ID missing from environment. Using fallback videos.");
