@@ -141,45 +141,67 @@ async function fetchAllLatestVideos(): Promise<Video[]> {
       ? "UU" + channelId.slice(2)
       : channelId;
 
-    const playlistUrl = new URL("https://www.googleapis.com/youtube/v3/playlistItems");
-    playlistUrl.searchParams.set("key", apiKey);
-    playlistUrl.searchParams.set("playlistId", uploadsPlaylistId);
-    playlistUrl.searchParams.set("part", "snippet");
-    playlistUrl.searchParams.set("maxResults", "50");
+    const allPlaylistItems: YouTubePlaylistItem[] = [];
+    let pageToken: string | undefined = undefined;
 
-    const playlistResponse = await fetch(playlistUrl.toString(), { next: { revalidate: 3600 } });
-    if (!playlistResponse.ok) {
-      const errText = await playlistResponse.text();
-      console.error(`YouTube Playlist API error (${playlistResponse.status}):`, errText);
-      return fallbackVideos;
-    }
+    do {
+      const playlistUrl = new URL("https://www.googleapis.com/youtube/v3/playlistItems");
+      playlistUrl.searchParams.set("key", apiKey);
+      playlistUrl.searchParams.set("playlistId", uploadsPlaylistId);
+      playlistUrl.searchParams.set("part", "snippet");
+      playlistUrl.searchParams.set("maxResults", "50");
+      if (pageToken) {
+        playlistUrl.searchParams.set("pageToken", pageToken);
+      }
 
-    const playlistData = (await playlistResponse.json()) as { items?: YouTubePlaylistItem[] };
-    const items = playlistData.items ?? [];
-    const videoIds = items
-      .map((item) => item.snippet?.resourceId?.videoId)
-      .filter((id): id is string => Boolean(id))
-      .join(",");
+      const playlistResponse = await fetch(playlistUrl.toString(), { next: { revalidate: 3600 } });
+      if (!playlistResponse.ok) {
+        const errText = await playlistResponse.text();
+        console.error(`YouTube Playlist API error (${playlistResponse.status}):`, errText);
+        break;
+      }
 
-    if (!videoIds) {
+      const playlistData = (await playlistResponse.json()) as {
+        items?: YouTubePlaylistItem[];
+        nextPageToken?: string;
+      };
+      if (playlistData.items && playlistData.items.length > 0) {
+        allPlaylistItems.push(...playlistData.items);
+      }
+      pageToken = playlistData.nextPageToken;
+    } while (pageToken && allPlaylistItems.length < 250);
+
+    if (allPlaylistItems.length === 0) {
       console.warn("No video IDs found in YouTube playlist response.");
       return fallbackVideos;
     }
 
-    const videoUrl = new URL("https://www.googleapis.com/youtube/v3/videos");
-    videoUrl.searchParams.set("key", apiKey);
-    videoUrl.searchParams.set("id", videoIds);
-    videoUrl.searchParams.set("part", "snippet,contentDetails,statistics");
+    const allVideoIds = allPlaylistItems
+      .map((item) => item.snippet?.resourceId?.videoId)
+      .filter((id): id is string => Boolean(id));
 
-    const videoResponse = await fetch(videoUrl.toString(), { next: { revalidate: 3600 } });
-    if (!videoResponse.ok) {
-      const errText = await videoResponse.text();
-      console.error(`YouTube Videos API error (${videoResponse.status}):`, errText);
-      return fallbackVideos;
+    const chunkSize = 50;
+    const fetchedVideos: YouTubeVideoItem[] = [];
+
+    for (let i = 0; i < allVideoIds.length; i += chunkSize) {
+      const chunk = allVideoIds.slice(i, i + chunkSize).join(",");
+      const videoUrl = new URL("https://www.googleapis.com/youtube/v3/videos");
+      videoUrl.searchParams.set("key", apiKey);
+      videoUrl.searchParams.set("id", chunk);
+      videoUrl.searchParams.set("part", "snippet,contentDetails,statistics");
+
+      const videoResponse = await fetch(videoUrl.toString(), { next: { revalidate: 3600 } });
+      if (!videoResponse.ok) {
+        const errText = await videoResponse.text();
+        console.error(`YouTube Videos API error (${videoResponse.status}):`, errText);
+        continue;
+      }
+
+      const videoData = (await videoResponse.json()) as { items?: YouTubeVideoItem[] };
+      if (videoData.items) {
+        fetchedVideos.push(...videoData.items);
+      }
     }
-
-    const videoData = (await videoResponse.json()) as { items?: YouTubeVideoItem[] };
-    const fetchedVideos = videoData.items ?? [];
 
     if (fetchedVideos.length === 0) {
       return fallbackVideos;
@@ -206,7 +228,7 @@ async function fetchAllLatestVideos(): Promise<Video[]> {
   }
 }
 
-export const getLatestVideos = cache(async function getLatestVideos(maxResults = 12): Promise<Video[]> {
+export const getLatestVideos = cache(async function getLatestVideos(maxResults?: number): Promise<Video[]> {
   const now = Date.now();
   if (!fetchCachePromise || now - lastCacheTime > CACHE_TTL_MS) {
     lastCacheTime = now;
@@ -218,11 +240,14 @@ export const getLatestVideos = cache(async function getLatestVideos(maxResults =
   }
 
   const videos = await fetchCachePromise;
-  return videos.slice(0, maxResults);
+  if (typeof maxResults === "number" && maxResults > 0) {
+    return videos.slice(0, maxResults);
+  }
+  return videos;
 });
 
 export async function getVideoById(id: string) {
-  const videos = await getLatestVideos(50);
+  const videos = await getLatestVideos();
   return videos.find((video) => video.id === id) ?? fallbackVideos.find((video) => video.id === id);
 }
 
