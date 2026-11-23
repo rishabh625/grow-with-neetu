@@ -1,5 +1,4 @@
 import { cache } from "react";
-import { subjects } from "@/lib/taxonomy";
 
 export type Video = {
   id: string;
@@ -107,8 +106,20 @@ const fallbackVideos: Video[] = [
     duration: "YouTube",
     views: 9751,
     thumbnail: "https://i1.ytimg.com/vi/T8dvL_QQDjM/hqdefault.jpg",
-    subjectSlugs: ["strategy"],
+    subjectSlugs: ["strategy", "pyqs", "csat"],
     examSlugs: ["rajyaseva"]
+  },
+  {
+    id: "mvPU3pirb9I",
+    title: "135th birth anniversary of B. R. Ambedkar — a true architect of equality and justice.",
+    description:
+      "A tribute to Dr. B. R. Ambedkar discussing his foundational contributions to Indian history, constitution, equality and economic thoughts.",
+    publishedAt: "2026-04-14T09:30:00Z",
+    duration: "YouTube",
+    views: 1250,
+    thumbnail: "https://i.ytimg.com/vi/mvPU3pirb9I/hqdefault.jpg",
+    subjectSlugs: ["history", "polity", "economics"],
+    examSlugs: ["rajyaseva", "combined-exam"]
   }
 ];
 
@@ -223,31 +234,220 @@ export function youtubeEmbedUrl(id: string) {
   return `https://www.youtube.com/embed/${id}`;
 }
 
-function inferSubjects(text: string) {
-  const normalized = text.toLowerCase();
-  const matches = subjects
-    .filter((subject) => normalized.includes(subject.name.toLowerCase()) || normalized.includes(subject.slug))
-    .map((subject) => subject.slug);
+const SUBJECT_PATTERNS: Record<string, (string | RegExp)[]> = {
+  "history": [
+    /\bhistory\b/i,
+    /\bitihas\b/i,
+    /\bambedkar\b/i,
+    /\bgandhi\b/i,
+    /\bnehru\b/i,
+    /\bshivaji\b/i,
+    /\bancient\b/i,
+    /\bmedieval\b/i,
+    /\bmodern history\b/i,
+    /\bfreedom struggle\b/i,
+    /\brevolt\b/i,
+    /\bsocial reformers?\b/i
+  ],
+  "polity": [
+    /\bpolity\b/i,
+    /\bconstitution\b/i,
+    /\bsamvidhan\b/i,
+    /\bparliament\b/i,
+    /\bfadnavis\b/i,
+    /\bpost preference\b/i,
+    /\binterview dates\b/i,
+    /\btimetable changed\b/i,
+    /\blaw\b/i,
+    /\bcommission\b/i,
+    /\breforms\b/i,
+    /\bgovernance\b/i,
+    /\bpanchayat\b/i
+  ],
+  "geography": [
+    /\bgeography\b/i,
+    /\bbhugol\b/i,
+    /\bmonsoon\b/i,
+    /\bclimate\b/i,
+    /\briver\b/i,
+    /\bsoil\b/i,
+    /\bplateau\b/i,
+    /\bmaps?\b/i
+  ],
+  "economics": [
+    /\beconomics?\b/i,
+    /\beconomy\b/i,
+    /\bbudget\b/i,
+    /\brupee\b/i,
+    /\brbi\b/i,
+    /\bgdp\b/i,
+    /\binflation\b/i,
+    /\bproblem of the rupee\b/i
+  ],
+  "environment": [
+    /\benvironment\b/i,
+    /\becology\b/i,
+    /\bcop\b/i,
+    /\bozone\b/i,
+    /\btreaty\b/i,
+    /\btreaties\b/i,
+    /\bbiodiversity\b/i,
+    /\bforest service\b/i,
+    /\bforests?\b/i,
+    /\brio earth summit\b/i,
+    /\bclimate change\b/i,
+    /\bparyavaran\b/i
+  ],
+  "science": [
+    /\bscience\b/i,
+    /\bphysics\b/i,
+    /\bchemistry\b/i,
+    /\bbiology\b/i,
+    /\bozone layer\b/i,
+    /\bisro\b/i,
+    /\btechnology\b/i
+  ],
+  "current-affairs": [
+    /\bcurrent affairs\b/i,
+    /\bnewspaper\b/i,
+    /\bnews\b/i,
+    /\bpaper leaks?\b/i,
+    /\bprotest\b/i,
+    "आक्रोश",
+    "आंदोलन",
+    /\bresult\b/i,
+    /\binterview delay\b/i,
+    /\bnotification out\b/i,
+    /\bdrug inspector\b/i,
+    /\bcop\b/i,
+    /\bfadnavis\b/i,
+    /\b70th bpsc\b/i,
+    /\b72nd bpsc\b/i,
+    /\bexam cancelled\b/i,
+    /\bupdate\b/i
+  ],
+  "marathi-grammar": [
+    /\bmarathi\b/i,
+    "मराठी",
+    /\bvyakaran\b/i,
+    /\blanguage paper\b/i
+  ],
+  "english": [
+    /\benglish\b/i,
+    /\bvocabulary\b/i,
+    /\bgrammar\b/i,
+    /\breading comprehension\b/i
+  ],
+  "csat": [
+    /\bcsat\b/i,
+    /\baptitude\b/i,
+    /\bcomprehension\b/i,
+    /\beliminations?\b/i,
+    /\btricks\b/i,
+    /\blogical\b/i
+  ],
+  "reasoning": [
+    /\breasoning\b/i,
+    /\blogical reasoning\b/i,
+    /\banalytical\b/i
+  ],
+  "maths": [
+    /\bmaths?\b/i,
+    /\bmathematics\b/i,
+    /\bquant\b/i,
+    /\barithmetic\b/i
+  ],
+  "pyqs": [
+    /\bpyqs?\b/i,
+    /\bprevious year\b/i,
+    /\bpaper analysis\b/i,
+    /\bmarks discrepancy\b/i,
+    /\bcutoff\b/i
+  ],
+  "mock-tests": [
+    /\bmock tests?\b/i,
+    /\btest series\b/i
+  ],
+  "strategy": [
+    /\bstrategy\b/i,
+    /\bhow to prepare\b/i,
+    /\bsyllabus\b/i,
+    /\bbooklist\b/i,
+    /\bprelims\b/i,
+    /\bmains\b/i,
+    /\banswer writing\b/i,
+    /\bnotes from newspaper\b/i,
+    /\bncerts\b/i,
+    /\bdisappear for 60 days\b/i,
+    /\bdistraction journal\b/i,
+    /\bpost preference\b/i
+  ],
+  "motivation": [
+    /\bmotivation\b/i,
+    /\bmindset\b/i,
+    /\banxiety\b/i,
+    /\bfears?\b/i,
+    /\boverthinking\b/i,
+    /\bmental health\b/i,
+    /\bdiscipline\b/i,
+    /\bfocus\b/i,
+    /\basset\b/i,
+    /\bfark hai\b/i,
+    /\bhappiness\b/i,
+    /\bsaying no\b/i,
+    /\bdistraction\b/i,
+    /\bconsistency\b/i,
+    /\bhabits?\b/i
+  ]
+};
 
-  return matches.length ? matches.slice(0, 4) : ["strategy"];
+function inferSubjects(text: string): string[] {
+  const matches: string[] = [];
+
+  for (const [subjectSlug, patterns] of Object.entries(SUBJECT_PATTERNS)) {
+    const isMatch = patterns.some((p) => {
+      if (typeof p === "string") {
+        return text.includes(p);
+      }
+      return p.test(text);
+    });
+    if (isMatch) {
+      matches.push(subjectSlug);
+    }
+  }
+
+  // Do NOT blindly assign strategy or history to personal/unrelated posts
+  return matches.slice(0, 4);
 }
 
 function inferExams(text: string) {
   const normalized = text.toLowerCase();
   const exams = [
-    ["rajyaseva", "rajyaseva"],
-    ["combined-exam", "combined"],
-    ["psi", "psi"],
-    ["sti", "sti"],
-    ["aso", "aso"],
-    ["forest", "forest"],
-    ["talathi", "talathi"],
-    ["zp", "zp"],
-    ["police-bharti", "police"]
+    ["rajyaseva", /\b(rajyaseva|राज्यसेवा)\b/i],
+    ["combined-exam", /\b(combined|गट ब|गट क)\b/i],
+    ["psi", /\bpsi\b/i],
+    ["sti", /\bsti\b/i],
+    ["aso", /\baso\b/i],
+    ["forest", /\bforest\b/i],
+    ["talathi", /\btalathi\b/i],
+    ["zp", /\bzp\b/i],
+    ["police-bharti", /\bpolice\b/i]
   ] as const;
-  const matches = exams.filter(([, keyword]) => normalized.includes(keyword)).map(([slug]) => slug);
 
-  return matches.length ? matches.slice(0, 4) : ["rajyaseva", "combined-exam"];
+  const matches = exams
+    .filter(([, pattern]) => pattern.test(normalized))
+    .map(([slug]) => slug);
+
+  if (matches.length > 0) {
+    return matches.slice(0, 4);
+  }
+
+  // Check if MPSC or general Maharashtra civil service exam is mentioned
+  if (/\bmpsc\b/i.test(normalized)) {
+    return ["rajyaseva", "combined-exam"];
+  }
+
+  return [];
 }
 
 function formatDuration(duration: string) {

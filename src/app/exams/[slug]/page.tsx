@@ -34,8 +34,8 @@ export default async function ExamPage({ params }: { params: Promise<{ slug: str
   const exam = getExam(slug);
   if (!exam) notFound();
 
-  const videos = await getLatestVideos(24);
-  const relatedVideos = videos.filter((video) => video.examSlugs.includes(exam.slug)).slice(0, 6);
+  const videos = await getLatestVideos(50);
+  const relatedVideos = videos.filter((video) => video.examSlugs.includes(exam.slug));
   const focusSubjects = subjects.filter((subject) =>
     exam.focusAreas.some((focus) => subject.name.toLowerCase().includes(focus.toLowerCase()) || focus.toLowerCase().includes(subject.name.toLowerCase()))
   );
@@ -78,11 +78,28 @@ export default async function ExamPage({ params }: { params: Promise<{ slug: str
 
           <section>
             <h2 className="mb-5 text-2xl font-black tracking-[-0.04em] text-slate-950">Latest {exam.name} Videos</h2>
-            <div className="grid gap-6 md:grid-cols-2">
-              {(relatedVideos.length ? relatedVideos : videos.slice(0, 4)).map((video) => (
-                <VideoCard key={video.id} video={video} />
-              ))}
-            </div>
+            {relatedVideos.length > 0 ? (
+              <div className="grid gap-6 md:grid-cols-2">
+                {relatedVideos.map((video) => (
+                  <VideoCard key={video.id} video={video} />
+                ))}
+              </div>
+            ) : (
+              <div className="rounded-[1.75rem] border border-dashed border-blue-200 bg-blue-50/50 p-8 text-center">
+                <p className="text-base font-bold text-slate-800">No dedicated {exam.name} videos uploaded yet.</p>
+                <p className="mt-2 text-sm text-slate-600">
+                  Explore {exam.name} notes and resources below or browse all latest video lectures.
+                </p>
+                <div className="mt-5">
+                  <a
+                    href="/latest-videos"
+                    className="inline-flex items-center rounded-full bg-blue-600 px-5 py-2.5 text-xs font-black text-white shadow-sm transition hover:bg-blue-700"
+                  >
+                    Browse All Videos
+                  </a>
+                </div>
+              </div>
+            )}
           </section>
 
           <section>

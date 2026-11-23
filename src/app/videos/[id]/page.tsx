@@ -96,12 +96,6 @@ export default async function VideoPage({ params }: { params: Promise<{ id: stri
             </ul>
           </ContentSection>
 
-          <ContentSection title="Transcript">
-            <p>
-              Transcript ingestion is ready for CMS/API integration. When a transcript is available, publish it here
-              to improve accessibility, long-tail SEO and revision value.
-            </p>
-          </ContentSection>
 
           <ContentSection title="Key Takeaways and Exam Relevance">
             <ul className="list-disc space-y-3 pl-5">
@@ -140,11 +134,17 @@ export default async function VideoPage({ params }: { params: Promise<{ id: stri
           <div className="rounded-[1.5rem] border border-blue-100 bg-white p-6 shadow-sm">
             <h2 className="text-xl font-black text-slate-950">Related Subjects</h2>
             <div className="mt-4 flex flex-wrap gap-3">
-              {(relatedSubjects.length ? relatedSubjects : subjects.slice(0, 4)).map((subject) => (
-                <Link key={subject.slug} href={`/subjects/${subject.slug}`} className="rounded-full bg-blue-50 px-4 py-2 text-sm font-black text-blue-700 transition hover:bg-blue-100">
-                  {subject.name}
+              {relatedSubjects.length > 0 ? (
+                relatedSubjects.map((subject) => (
+                  <Link key={subject.slug} href={`/subjects/${subject.slug}`} className="rounded-full bg-blue-50 px-4 py-2 text-sm font-black text-blue-700 transition hover:bg-blue-100">
+                    {subject.name}
+                  </Link>
+                ))
+              ) : (
+                <Link href="/subjects" className="rounded-full bg-blue-50 px-4 py-2 text-sm font-black text-blue-700 transition hover:bg-blue-100">
+                  Explore Subjects
                 </Link>
-              ))}
+              )}
             </div>
           </div>
 

@@ -123,6 +123,25 @@ export default function AboutPage() {
           <div className="mt-6">
             <h2 className="text-2xl font-black tracking-[-0.04em] text-slate-950">Neetu Tiwari</h2>
             <p className="mt-2 text-sm font-bold text-emerald-600">Civil Services Educator & Mentor (MPSC-focused)</p>
+            <div className="mt-4 flex flex-col gap-2 rounded-2xl border border-red-100 bg-red-50/60 p-4">
+              <a
+                href={siteConfig.youtubeChannelUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center justify-center rounded-full bg-red-600 px-5 py-2.5 text-sm font-black text-white shadow-sm transition hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500"
+              >
+                <PlayCircle aria-hidden="true" className="mr-2 h-4 w-4 shrink-0" />
+                Watch her on YouTube
+              </a>
+              <a
+                href={siteConfig.youtubeChannelUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="break-all text-center text-xs font-semibold text-slate-600 underline underline-offset-2 transition hover:text-red-700"
+              >
+                {siteConfig.youtubeChannelUrl}
+              </a>
+            </div>
           </div>
         </div>
 

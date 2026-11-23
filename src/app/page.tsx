@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, BookOpen, CheckCircle2, PlayCircle, Search } from "lucide-react";
+import { ArrowRight, BookOpen, CheckCircle2, PlayCircle } from "lucide-react";
 import { LinkCard } from "@/components/card-grid";
 import { SubscribeCta } from "@/components/cta-card";
 import { SectionHeading } from "@/components/section-heading";
@@ -9,7 +9,7 @@ import { SearchBox } from "@/components/search-box";
 import { resources } from "@/lib/content";
 import { siteConfig } from "@/lib/site";
 import { exams, subjects } from "@/lib/taxonomy";
-import { getLatestVideos, youtubeWatchUrl } from "@/lib/youtube";
+import { getLatestVideos } from "@/lib/youtube";
 import { createMetadata } from "@/lib/seo";
 
 export const dynamic = "force-static";
@@ -95,14 +95,38 @@ export default async function HomePage() {
               <div className="bg-white p-6">
                 <p className="text-sm font-black uppercase tracking-[0.18em] text-emerald-600">About Neetu</p>
                 <h2 className="mt-2 text-2xl font-black tracking-[-0.04em] text-slate-950">
-                  Focused guidance for serious aspirants.
+                  Neetu Tiwari
                 </h2>
-                <p className="mt-3 text-sm leading-6 text-slate-600">
+                <p className="mt-1 text-sm font-bold text-emerald-600">
+                  Civil Services Educator & Mentor (MPSC-focused)
+                </p>
+
+                <div className="mt-4 flex flex-col gap-2 rounded-2xl border border-red-100 bg-red-50/60 p-4">
+                  <a
+                    href={siteConfig.youtubeChannelUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center justify-center rounded-full bg-red-600 px-5 py-2.5 text-sm font-black text-white shadow-sm transition hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+                  >
+                    <PlayCircle aria-hidden="true" className="mr-2 h-4 w-4 shrink-0" />
+                    Watch her on YouTube
+                  </a>
+                  <a
+                    href={siteConfig.youtubeChannelUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="break-all text-center text-xs font-semibold text-slate-600 underline underline-offset-2 transition hover:text-red-700"
+                  >
+                    {siteConfig.youtubeChannelUrl}
+                  </a>
+                </div>
+
+                <p className="mt-4 text-sm leading-6 text-slate-600">
                   Neetu&apos;s videos combine exam analysis, mindset, revision discipline and actionable
                   strategies for competitive exam preparation.
                 </p>
                 {featured ? (
-                  <Link href={`/videos/${featured.id}`} className="mt-5 inline-flex items-center text-sm font-black text-blue-700">
+                  <Link href={`/videos/${featured.id}`} className="mt-4 inline-flex items-center text-sm font-black text-blue-700 hover:text-blue-800">
                     Watch latest upload
                     <ArrowRight aria-hidden="true" className="ml-2 h-4 w-4" />
                   </Link>
