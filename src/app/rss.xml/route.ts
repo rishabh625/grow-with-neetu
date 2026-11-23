@@ -5,7 +5,7 @@ import { getLatestVideos } from "@/lib/youtube";
 export const dynamic = "force-static";
 
 export async function GET() {
-  const videos = await getLatestVideos(50);
+  const videos = await getLatestVideos();
   const articles = videos.map(articleFromVideo);
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">

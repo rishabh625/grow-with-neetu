@@ -7,7 +7,7 @@ import { getLatestVideos } from "@/lib/youtube";
 export const dynamic = "force-static";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const videos = await getLatestVideos(50);
+  const videos = await getLatestVideos();
   const now = new Date();
 
   const staticRoutes = ["/", "/subjects", "/exams", "/latest-videos", "/blog", "/notes", "/about", "/contact", "/search"].map((path) => ({

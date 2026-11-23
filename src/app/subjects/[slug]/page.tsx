@@ -34,7 +34,7 @@ export default async function SubjectPage({ params }: { params: Promise<{ slug: 
   const subject = getSubject(slug);
   if (!subject) notFound();
 
-  const videos = await getLatestVideos(50);
+  const videos = await getLatestVideos();
   const relatedVideos = videos.filter((video) => video.subjectSlugs.includes(subject.slug));
 
   return (

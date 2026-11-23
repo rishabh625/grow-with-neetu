@@ -34,7 +34,7 @@ export default async function ExamPage({ params }: { params: Promise<{ slug: str
   const exam = getExam(slug);
   if (!exam) notFound();
 
-  const videos = await getLatestVideos(50);
+  const videos = await getLatestVideos();
   const relatedVideos = videos.filter((video) => video.examSlugs.includes(exam.slug));
   const focusSubjects = subjects.filter((subject) =>
     exam.focusAreas.some((focus) => subject.name.toLowerCase().includes(focus.toLowerCase()) || focus.toLowerCase().includes(subject.name.toLowerCase()))
